@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-const AnimatedText = ({ text, color, size }) => {
+const AnimatedGlowText = ({ text, color, size, blur = 5 }) => {
   const glowColor = color || "#ffffff"; // Default to white if no color is provided
   // const textShadow = `0 0 0 px ${glowColor}, 0 0 0 px ${glowColor}, 0 0 0 px ${glowColor}`;
   const textpropsm = `relative text-4xl sm:text-3xl md:text-3xl lg:text-2xl font-bold`; // size is sm
@@ -16,11 +16,15 @@ const AnimatedText = ({ text, color, size }) => {
         visible: {
           opacity: 1,
           scale: 1,
+          textShadow: `0 0 0 ${glowColor}, 0 0 0 ${glowColor}, 0 0 ${
+            blur * 2
+          }px`,
           transition: { duration: 1, ease: "easeInOut" },
         },
         hidden: {
           opacity: 0,
           scale: 0,
+          textShadow: `0 0 0 px ${glowColor}, 0 0 0 px ${glowColor}, 0 0 0 px ${glowColor}`,
           transition: { duration: 1, ease: "easeInOut" },
         },
       }}
@@ -41,8 +45,9 @@ const AnimatedText = ({ text, color, size }) => {
         fontSmooth: "always",
       }}
     >
-      {text}
+      {" "}
+      {text}{" "}
     </motion.div>
   );
 };
-export default AnimatedText;
+export default AnimatedGlowText;
